@@ -1,0 +1,152 @@
+<h2 class="text-center mt-3">Registro de Usuario</h2>
+<form class="mt-3" [formGroup]="regUsuario" (ngSubmit)="guardar()">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Nombres</label>
+      <input type="text" class="form-control" formControlName="nombres"
+       [ngClass]="{'is-invalid': regUsuario.get('nombres').errors && regUsuario.get('nombres').touched}" />
+       <div class="invalid-feedback">Ingrese sus apellidos es necesario</div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Apellidos</label>
+      <input type="text" class="form-control" formControlName="apellidos"
+      [ngClass]="{'is-invalid': regUsuario.get('apellidos').errors && regUsuario.get('apellidos').touched}" />
+      <div class="invalid-feedback">Ingrese sus apellidos es necesario</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label>DNI</label>
+      <input type="text" class="form-control" formControlName="dni" 
+      [ngClass]="{'is-invalid': regUsuario.get('dni').errors && regUsuario.get('dni').touched}"/>
+      <div class="invalid-feedback">Ingrese un nro de DNI valido</div>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Correo Electronico</label>
+      <input type="text" class="form-control" formControlName="email"
+      [ngClass]="{'is-invalid': regUsuario.get('email').errors && regUsuario.get('email').touched}"/>
+      <div class="invalid-feedback">Ingrese un correo valido</div>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Celular</label>
+      <input type="text " class="form-control" formControlName="phoneNumber"
+      [ngClass]="{'is-invalid': regUsuario.get('phoneNumber').errors && regUsuario.get('phoneNumber').touched}" />
+      <div class="invalid-feedback">Ingrese un nro de Celular valido</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label>Region</label>
+      <select class="form-control" #r (change)="obtenerProvincia(r.value)">
+        <option>Selecione una Region</option>
+        <option *ngFor="let region of regiones" [value]="region.id_ubigeo" > {{region.nombre_ubigeo}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Provincia</label>
+      <select class="form-control" #p (change)="obtenerDistritos(p.value)">
+        <option>Selecione una Provincia</option>
+        <option *ngFor="let provincia of provincias" [value]="provincia.id_ubigeo"> {{provincia.nombre_ubigeo}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Distrito</label>
+      <select formControlName="ubigeoId" class="form-control">
+         <option *ngFor="let distrito of distritos" [value]="distrito.id">{{distrito.nombre_ubigeo}}</option>
+       </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Direccion</label>
+    <input type="text " class="form-control" formControlName="direccion"
+    [ngClass]="{'is-invalid': regUsuario.get('direccion').errors && regUsuario.get('direccion').touched}" />
+    <div class="invalid-feedback">Es necesaria una direccion</div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputState ">Genero</label>
+      <select  class="form-control" formControlName="genero">
+        <option>Mujer</option>
+        <option>Hombre</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+        <mat-form-field>
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input matInput [max]="maxDate" [matDatepicker]="picker"  class="form-control" formControlName="fecha_Nacimiento"
+            [ngClass]="{'is-invalid': regUsuario.get('fecha_Nacimiento').errors && regUsuario.get('fecha_Nacimiento').touched}">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error class="invalid-feedback">Debe ingresar una fecha de nacimiento</mat-error>
+        </mat-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Password</label>
+      <input type="password" class="form-control" formControlName="password" 
+      [ngClass]="{
+        'is-invalid':
+          regUsuario.get('password').errors &&
+          regUsuario.get('password').touched}"/>
+      <div  class="invalid-feedback"
+      *ngIf="
+        regUsuario.get('password').hasError('required') &&
+        regUsuario.get('password').touched">
+          Password es necesario
+      </div>
+      <div
+      class="invalid-feedback"
+      *ngIf="
+        regUsuario.get('password').hasError('minLength') &&
+        regUsuario.get('password').touched">
+      Password debe tener como minimo 8 caracteres
+    </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label> ConfimaPassword</label>
+      <input
+        type="password"
+        class="form-control"
+        formControlName="confirmPassword"       
+        [ngClass]="{
+            'is-invalid':
+              (regUsuario.get('confirmPassword').errors &&
+                regUsuario.get('confirmPassword').touched) ||
+              (regUsuario.get('confirmPassword').touched &&
+                regUsuario.hasError('mismatch'))
+          }" />
+          <div
+          class="invalid-feedback"
+          *ngIf="
+            regUsuario.get('confirmPassword').hasError('required') &&
+            regUsuario.get('confirmPassword').touched
+          "
+        >
+         se necesita confirmar password
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            regUsuario.hasError('mismatch') &&
+            regUsuario.get('confirmPassword').touched
+          "
+        >
+           <div
+      class="invalid-feedback"
+      *ngIf="
+        regUsuario.get('confirmPassword').hasError('required') &&
+        regUsuario.get('confirmPassword').touched
+      "
+    >
+      Confirm Password is required
+    </div>
+    <div class="invalid-feedback" *ngIf="regUsuario.hasError('mismatch') && regUsuario.get('confirmPassword').touched">
+     Passwords no coinciden 
+    </div>
+        </div>
+    </div>
+  </div>
+
+  <button type="submit " mat-raised-button color="primary" [disabled]="regUsuario.invalid">Registrar</button>
+</form>

@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="text-center mt-3 mb-3 titulo">Agregar Producto</h4>
+        <form [formGroup]="productoGuadar" (submit)="guardarProducto()" class="mt-3">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Modelo</label>
+                    <div class="alinear-boton">
+                        <select class="form-control" formControlName="modeloId" [class.is-invalid]="modeloValido">
+                    <option *ngFor="let Modelo of listaModelos" [value]="Modelo.id">{{Modelo.descripcion}}</option>
+                    </select>
+                        <div>
+                            <button class="btn btn-primary" (click)="nuevaModelo()"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <small *ngIf="modeloValido" class="text-danger text-center">
+                        Debe seleccionar una categoria
+                    </small>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Categoria</label>
+                    <div class="alinear-boton">
+                        <select class="form-control" formControlName="categoriaId" [class.is-invalid]="categoriaValido">
+                    <option *ngFor="let Categoria of listaCategorias" [value]="Categoria.id">{{Categoria.descripcion}}</option>
+                    </select>
+                        <div>
+                            <button class="btn btn-primary" (click)="nuevaCategoria()"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <small *ngIf="categoriaValido" class="text-danger text-center">
+                        Debe seleccionar una categoria
+                    </small>
+                </div>
+
+            </div>
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label>Serie</label>
+                    <input type="text" class="form-control" formControlName="serie" [class.is-invalid]="serieValido">
+                    <small *ngIf="serieValido" class="text-danger">Debe ingresar un número de serie</small>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Marca</label>
+                    <input type="text" class="form-control" formControlName="marca" [class.is-invalid]="marcaValido">
+                    <small *ngIf="marcaValido" class="text-danger">Debe ingresar una marca</small>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Estado</label>
+                    <select class="form-control" formControlName="estado">
+              <option selected value="true">Activo</option>
+              <option value = "false">Desactivado</option>
+            </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Precio de Compra</label>
+                    <input type="text" class="form-control" formControlName="precio_Compra" [class.is-invalid]="precioCompraValido">
+                    <small *ngIf="precioCompraValido" class="text-danger">Debe ingresar una precio</small>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Precio de Venta</label>
+                    <input type="text" class="form-control" formControlName="precio_Venta" [class.is-invalid]="precioVentaValido">
+                    <small *ngIf="precioVentaValido" class="text-danger">Debe ingresar una precio</small>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Descripción</label>
+                    <textarea class="form-control" formControlName="descripcion"></textarea>
+                </div>
+            </div>
+
+
+            <button type="button" class="btn btn-primary mr-3" [routerLink]="['/admin']"> < Anterior </button>
+            <button type="submit" class="btn btn-primary" [disabled]="productoGuadar.invalid"><i class="fa fa-image"></i> Siguiente ></button>
+        </form>
+    </div>
+
+
+</div>
