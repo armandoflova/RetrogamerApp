@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class Authorization {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   constructor(private http: HttpClient) { }

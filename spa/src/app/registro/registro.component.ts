@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { RetrogamerService } from '../Servicios/retrogamer.service';
 import { Ubigeo } from '../Models/Ubigeo';
 import { Usuario } from '../Models/Usuario';
-import { AuthService } from '../Servicios/auth.service';
+import { Authorization } from '../Servicios/authorization.service';
 
 @Component({
   selector: 'app-registro',
@@ -19,7 +19,7 @@ export class RegistroComponent implements OnInit {
   usuario: Usuario;
   constructor(private fb: FormBuilder,
               private Retrogamer: RetrogamerService,
-              private Auth: AuthService) {}
+              private Auth: Authorization) {}
 
   ngOnInit(): void {
     this.maxDate = new Date();

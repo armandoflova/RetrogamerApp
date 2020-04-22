@@ -33,6 +33,22 @@ import { AddModeloComponent } from './admin/add-modelo/add-modelo.component';
 import { EditProductComponent } from './admin/edit-product/edit-product.component';
 import { SubirFotoComponent } from './admin/subir-foto/subir-foto.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('278224971717-81tiu8jrd494ilbfibti9hp9656hp2j8.apps.googleusercontent.com')
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('3688656031204608')
+  }
+]);
+export function provideConfig() {
+  return config;
+}
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -76,6 +92,7 @@ export function tokenGetter() {
     MatDatepickerModule,
     FileUploadModule,
     MatIconModule,
+    SocialLoginModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
@@ -84,7 +101,12 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

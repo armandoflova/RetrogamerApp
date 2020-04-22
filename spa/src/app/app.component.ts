@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Usuario } from './Models/Usuario';
-import { AuthService } from './Servicios/auth.service';
+import { Authorization } from './Servicios/authorization.service';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +15,8 @@ export class AppComponent  implements OnInit{
   /**
    *
    */
-  constructor(private authService: AuthService) {}
-  
+  constructor(private authService: Authorization) {}
+
   ngOnInit() {
     const token = localStorage.getItem('token');
     const user: Usuario = JSON.parse(localStorage.getItem('user'));

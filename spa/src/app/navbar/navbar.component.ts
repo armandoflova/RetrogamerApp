@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
-import { AuthService } from '../Servicios/auth.service';
+import { Authorization } from '../Servicios/authorization.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private router: Router,
-              public auth: AuthService) { }
+              public auth: Authorization) { }
 
   ngOnInit(): void {
   }

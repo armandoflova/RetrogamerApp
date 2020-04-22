@@ -1,11 +1,11 @@
-<form #form = "ngForm" autocomplete="off" (ngSubmit)="login()">
+<form #form="ngForm" autocomplete="off" (ngSubmit)="login()">
     <div class="form-group">
         <label>Correo Electronico</label>
         <input type="email" class="form-control" aria-describedby="emailHelp" [(ngModel)]="model.email" name="Email">
         <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su información con nadie más</small>
     </div>
     <div class="form-group">
-        <label  >Password</label>
+        <label>Password</label>
         <input type="password" class="form-control" [(ngModel)]="model.password" name="Password">
     </div>
     <div class="form-group form-check">
@@ -18,9 +18,10 @@
 <hr>
 <div class="row">
     <div class="col-md-12 mt-3">
-        <button class="btn btn-primary btn-block"> <i class="fa fa-facebook" aria-hidden="true"></i> Iniciar Sesion con facebook</button>
+        <button class="btn btn-primary btn-block" (click)="signInWithFB()"> <i class="fa fa-facebook" aria-hidden="true"></i> Iniciar Sesion con facebook</button>
     </div>
     <div class="col-md-12 mt-3">
-        <button class="btn btn-danger btn-block"> <i class="fa fa-google" aria-hidden="true"></i> Iniciar Sesion con Google</button>
+        <button class="btn btn-danger btn-block" (click)="signInWithGoogle()"> <i class="fa fa-google" aria-hidden="true" ></i> Iniciar Sesion con Google</button>
     </div>
+    <button class="btn btn-warning btn-block" (click)="signOut()"><i class="fa fa-close">Salir</i></button>
 </div>
