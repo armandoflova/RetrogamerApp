@@ -6,6 +6,8 @@ import { AdminComponent } from './admin/admin.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { SubirFotoComponent } from './admin/subir-foto/subir-foto.component';
 import { AuthGuard } from './Servicios/auth.guard';
+import { FotosComponent } from './admin/fotos/fotos.component';
+import { EditProductComponent } from './admin/edit-product/edit-product.component';
 
 
 const routes: Routes = [
@@ -15,10 +17,11 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      
-      {path: 'admin', component: AdminComponent, data : {roles: ["Administrador"]}},
-      {path: 'addProduct', component: AddProductComponent , data : {roles: ["Administrador"]}},
-      {path: 'addFoto', component: SubirFotoComponent , data : {roles: ["Administrador"]}}
+      {path: 'admin', component: AdminComponent, data : {roles: ['Administrador']}},
+      {path: 'addProduct', component: AddProductComponent , data : {roles: ['Administrador']}},
+      {path: 'addFoto', component: SubirFotoComponent , data : {roles: ['Administrador']}},
+      {path: 'fotos/:id', component: FotosComponent , data : {roles: ['Administrador']}},
+      {path: 'editar/:id', component: EditProductComponent , data : {roles: ['Administrador']}}
     ]
   },
   {path: '**', redirectTo: '',  pathMatch: 'full'}

@@ -56,7 +56,16 @@ namespace webapi.Controllers
             return Ok(ubiegeoReturn);
         }
        
+         [HttpGet("{productoId}/Fotos")]
 
+        public async Task<IActionResult> ObtenerFotos(int productoId)
+        {
+            var fotos = await _repo.ObtenerFotos(productoId);
+            var fotosReturn = _mapper.Map<IEnumerable<FotosReturnDtos>>(fotos);
+            return Ok(fotosReturn);
+        }
+
+        
 
         
     }

@@ -1,0 +1,22 @@
+<div class="row mt-5">
+    <div class="col-md-4">
+        <app-subir-foto [productoId]="producto.id" (addFoto)="agregarFoto($event)"></app-subir-foto>
+    </div>
+    <div class="col-md-8">
+        <!-- Grid row -->
+        <div class="gallery" id="gallery">
+
+            <!-- Grid column -->
+            <div class="mb-3 pics animation" *ngFor="let foto of fotos">
+                <img class="img-fluid" [src]="foto.url" [alt]="producto.marca" [class.esPrincipal]="foto.esPrincipal">
+                <ul class="list-inline foto-iconos animate text-center">
+                    <li class="list-inline-item"><button mat-raised-button color="primary" (click)="FotoPrincipal(foto)"><i class="fa fa-heart"></i></button></li>
+                    <li class="list-inline-item"><button mat-raised-button color="primary"><i class="fa fa-trash" (click)="eliminarFoto(foto)"></i></button></li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+    </div>
+</div>

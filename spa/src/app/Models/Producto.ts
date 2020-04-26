@@ -2,6 +2,7 @@ import { Foto } from './Foto';
 
 export interface Producto {
     id: number;
+    nombre?: string;
     descripcion: string;
     modeloId: number;
     categoriaId: number;

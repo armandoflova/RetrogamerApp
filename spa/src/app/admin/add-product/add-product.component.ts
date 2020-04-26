@@ -7,6 +7,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Routes, Router } from '@angular/router';
 import { AddCategoriaComponent } from '../add-categoria/add-categoria.component';
 import { AddModeloComponent } from '../add-modelo/add-modelo.component';
+import { RetrogamerService } from '../../Servicios/retrogamer.service';
+import { AdminService } from '../../Servicios/admin.service';
+import { Authorization } from '../../Servicios/authorization.service';
+import { UIService } from '../../Servicios/ui.service';
+
 
 @Component({
   selector: 'app-add-product',
@@ -20,7 +25,11 @@ export class AddProductComponent implements OnInit {
   producto: Producto;
   constructor(public dialog: MatDialog,
               private fb: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private retrogamer: RetrogamerService,
+              private admin: AdminService,
+              private auth: Authorization,
+              private ui: UIService) { }
 
 
 
@@ -30,6 +39,9 @@ export class AddProductComponent implements OnInit {
     this.obtenerModelos();
   }
 
+  get nombreValido() {
+    return this.productoGuadar.get('nombre').invalid && this.productoGuadar.get('nombre').touched;
+  }
   get categoriaValido() {
     return this.productoGuadar.get('categoriaId').invalid && this.productoGuadar.get('categoriaId').touched;
   }
@@ -52,7 +64,8 @@ export class AddProductComponent implements OnInit {
 
   CrearFormularioProducto() {
     this.productoGuadar = this.fb.group({
-      id: ['' ],
+      id: [null ],
+      nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
       modeloId : ['' , Validators.required],
       categoriaId: ['' , Validators.required],
@@ -63,7 +76,7 @@ export class AddProductComponent implements OnInit {
       estado: [false],
       precio_Compra: [0 , Validators.required],
       precio_Venta: [0 , Validators.required],
-      userId: [],
+      userId: [2],
     });
   }
 
@@ -83,27 +96,27 @@ export class AddProductComponent implements OnInit {
   }
 
   obtenerCategorias() {
-    // this.retrogamer.obtenerCategorias().subscribe( categorias => {
-    //   this.listaCategorias = categorias as Categoria[];
-    // });
+    this.retrogamer.obtenerCategorias().subscribe( categorias => {
+      this.listaCategorias = categorias as Categoria[];
+    });
   }
   obtenerModelos() {
-    // this.retrogamer.obtenerModelos().subscribe( Modelos => {
-    //   this.listaModelos = Modelos as Modelo[];
-    // });
+    this.retrogamer.obtenerModelos().subscribe( Modelos => {
+      this.listaModelos = Modelos as Modelo[];
+    });
   }
 
   guardarProducto() {
-    // console.log(this.productoGuadar.value);
-    // if (this.productoGuadar.valid) {
-    //   this.producto = Object.assign( {} , this.productoGuadar.value);
-    //   this.retrogamer.agregarProducto(this.producto).subscribe( (result: Producto) => {
-    //     this.producto = result;
-    //     this.router.navigate(['/fotos' , this.producto.id]);
-    //   }, error => {
-    //     this.ui.openSnackBar(error, null , 3000);
-    //   });
+    console.log(this.productoGuadar.value);
+    if (this.productoGuadar.valid) {
+      this.producto = Object.assign( {} , this.productoGuadar.value);
+      this.admin.agregarProducto(this.producto).subscribe( (result: Producto) => {
+        this.producto = result;
+        this.router.navigate(['/fotos' , this.producto.id]);
+      }, error => {
+       this.ui.openSnackBar(error, null , 3000);
+      });
 
-    // }
+    }
   }
 }

@@ -3,6 +3,15 @@
         <h4 class="text-center mt-3 mb-3 titulo">Agregar Producto</h4>
         <form [formGroup]="productoGuadar" (submit)="guardarProducto()" class="mt-3">
             <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Nombre</label>
+                    <input class="form-control" formControlName="nombre" [class.is-invalid]="nombreValido">
+                    <small *ngIf="nombreValido" class="text-danger text-center">
+                        Debe Ingresar un Nombre
+                    </small>
+                </div>
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Modelo</label>
                     <div class="alinear-boton">
@@ -10,7 +19,7 @@
                     <option *ngFor="let Modelo of listaModelos" [value]="Modelo.id">{{Modelo.descripcion}}</option>
                     </select>
                         <div>
-                            <button class="btn btn-primary" (click)="nuevaModelo()"><i class="fa fa-plus"></i></button>
+                            <button mat-raised-button color="primary" (click)="nuevaModelo()"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
                     <small *ngIf="modeloValido" class="text-danger text-center">
@@ -24,7 +33,7 @@
                     <option *ngFor="let Categoria of listaCategorias" [value]="Categoria.id">{{Categoria.descripcion}}</option>
                     </select>
                         <div>
-                            <button class="btn btn-primary" (click)="nuevaCategoria()"><i class="fa fa-plus"></i></button>
+                            <button mat-raised-button color="primary" (click)="nuevaCategoria()"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
                     <small *ngIf="categoriaValido" class="text-danger text-center">
@@ -73,8 +82,8 @@
             </div>
 
 
-            <button type="button" class="btn btn-primary mr-3" [routerLink]="['/admin']"> < Anterior </button>
-            <button type="submit" class="btn btn-primary" [disabled]="productoGuadar.invalid"><i class="fa fa-image"></i> Siguiente ></button>
+            <button type="button" mat-button class="mr-3" [routerLink]="['/admin']"> < Anterior </button>
+            <button type="submit" mat-raised-button color="primary" [disabled]="productoGuadar.invalid"><i class="fa fa-image"></i> Siguiente ></button>
         </form>
     </div>
 

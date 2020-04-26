@@ -79,7 +79,7 @@ namespace webapi.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier , user.Id.ToString()),
-                new Claim(ClaimTypes.Name , user.UserName)
+                new Claim(ClaimTypes.Name , user.Nombres)
             };
 
             var Roles = await _userManager.GetRolesAsync(user);
@@ -103,6 +103,48 @@ namespace webapi.Controllers
             var token = tokenhandler.CreateToken(tokenDescriptor);
 
             return tokenhandler.WriteToken(token);
+        }
+
+         [HttpPost("Social")]
+
+        public async Task<IActionResult> loginSocial(UserRegisterDtos usuarioRegistro)
+        {
+             var usuario = await _userManager.FindByEmailAsync(usuarioRegistro.Email);
+             if(usuario != null)
+             {
+                 var result = await _signInManager.CheckPasswordSignInAsync(usuario, usuarioRegistro.Password, false);
+                 if(result.Succeeded)
+                 {
+                        var userMap = _mapper.Map<UserReturnDtos>(usuario);
+                        return Ok(new
+                        {
+                            token = await GenerarJWT(usuario),
+                            user = userMap
+                        });
+                 }
+
+                 return Unauthorized();
+            }else {
+                usuarioRegistro.UserName = usuarioRegistro.Email;
+                var NuevoUsuario = _mapper.Map<User>(usuarioRegistro);
+                var result = await _userManager.CreateAsync(NuevoUsuario, usuarioRegistro.Password);
+                     await  _userManager.AddToRoleAsync(NuevoUsuario , "Miembro");
+                var usuarioReturn = _mapper.Map<UserReturnDtos>(NuevoUsuario);
+                
+                if (result.Succeeded)
+                {
+                     var usuarioCreado = await _userManager.FindByEmailAsync(usuarioRegistro.Email);
+                     var userMap = _mapper.Map<UserReturnDtos>(usuario);
+                        return Ok(new
+                        {
+                            token = await GenerarJWT(usuarioCreado),
+                            user = userMap
+                        });
+                }
+
+                return BadRequest(result.Errors);
+             }
+
         }
     }
 }

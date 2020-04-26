@@ -15,6 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +36,10 @@ import { SubirFotoComponent } from './admin/subir-foto/subir-foto.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { HasRoleDirective } from './Directivas/has-role.directive';
+import { FotosComponent } from './admin/fotos/fotos.component';
 
+// tslint:disable-next-line: prefer-const
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -69,7 +73,9 @@ export function tokenGetter() {
     AddCategoriaComponent,
     AddModeloComponent,
     EditProductComponent,
-    SubirFotoComponent
+    SubirFotoComponent,
+    HasRoleDirective,
+    FotosComponent
   ],
   imports: [
     BrowserModule,
@@ -90,9 +96,11 @@ export function tokenGetter() {
     MatNativeDateModule,
     MatInputModule,
     MatDatepickerModule,
+    MatSnackBarModule,
     FileUploadModule,
     MatIconModule,
     SocialLoginModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,

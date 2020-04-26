@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
 
-namespace webapi.Models
+namespace webapi.Dtos
 {
-    public class Producto
-    {  public int Id { get; set; }
+    public class ProductoGuardarDtos
+    {
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public virtual Modelo Modelo { get; set; }
         public int ModeloId { get; set; }
         public string Serie { get; set; }
         public string Marca { get; set; }
@@ -17,11 +15,7 @@ namespace webapi.Models
         public bool Estado { get; set; }
         public float Precio_Compra { get; set; }
         public float Precio_Venta { get; set; }
-        public virtual User User { get; set; }
         public int UserId { get; set; }
-        public virtual  ICollection<Foto> Fotos{ get; set; }
-        public virtual Categoria Categoria { get; set; }
-        public virtual ICollection<ProductoPedido>  ProductoPedidos { get; set; }
         public int CategoriaId { get; set; }
     }
 }

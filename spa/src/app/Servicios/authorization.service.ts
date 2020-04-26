@@ -4,6 +4,7 @@ import { Usuario } from '../Models/Usuario';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { map } from 'rxjs/operators';
 export class Authorization {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private router: Router) { }
 
   registrarUsuario(usuario: Usuario) {
     return this.http.post(environment.UrlApi + 'Auth/registro', usuario);
@@ -19,9 +21,9 @@ export class Authorization {
 
   login(model: any) {
     return this.http.post(environment.UrlApi + 'Auth/Login' , model).pipe(
-      map((resonse: any)=> {
+      map((resonse: any) => {
         const usuario = resonse;
-        if(usuario) {
+        if (usuario) {
           localStorage.setItem('token' , usuario.token);
           localStorage.setItem('user' , JSON.stringify(usuario.user));
           this.decodedToken = this.jwtHelper.decodeToken(usuario.token);
@@ -50,5 +52,20 @@ export class Authorization {
   logout() {
     localStorage.removeItem('token');
     this.decodedToken = null;
+    this.router.navigate(['/home']);
+  }
+
+  loginSocial(usuario: Usuario) {
+    return this.http.post(environment.UrlApi + 'Auth/Social' , usuario).pipe(
+      map((resonse: any) => {
+        // tslint:disable-next-line: no-shadowed-variable
+        const usuario = resonse;
+        if (usuario) {
+          localStorage.setItem('token' , usuario.token);
+          localStorage.setItem('user' , JSON.stringify(usuario.user));
+          this.decodedToken = this.jwtHelper.decodeToken(usuario.token);
+        }
+      })
+    );
   }
 }

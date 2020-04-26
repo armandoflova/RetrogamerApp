@@ -10,9 +10,19 @@
 The actual rendered columns are set as a property on the row definition" -->
 
     <!-- Position Column -->
-    <ng-container matColumnDef="serie">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> serie </th>
-        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.serie | uppercase}} </td>
+    <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> nombre </th>
+        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.nombre | uppercase}} </td>
+    </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="categoria">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> categoria </th>
+        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.categoria | uppercase}} </td>
+    </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="modelo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> modelo </th>
+        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.modelo | uppercase}} </td>
     </ng-container>
 
     <!-- Name Column -->
@@ -27,26 +37,26 @@ The actual rendered columns are set as a property on the row definition" -->
     </ng-container>
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="fecha_Registro">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha_Registro </th>
-        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.fecha_Registro | date: 'dd/MM/yy'}} </td>
+    <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha </th>
+        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.fecha | date: 'dd/MM/yy'}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="precio_Compra">
+    <ng-container matColumnDef="precioCompra">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio Compra </th>
-        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.precio_Compra | currency}} </td>
+        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.precioCompra | currency}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="precio_Venta">
+    <ng-container matColumnDef="precioVenta">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio Venta </th>
-        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.precio_Venta | currency}} </td>
+        <td mat-cell *matCellDef="let element" class="alert" [ngClass]="{'alert-danger': !element.estado}"> {{element.precioVenta | currency}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef><button mat-raised-button [routerLink]="['/addProduct' ]"><mat-icon>add</mat-icon></button></th>
         <td mat-cell *matCellDef="let element">
-            <mat-icon [routerLink]="['/editProd' , element.id]">more_vert</mat-icon>
+            <mat-icon [routerLink]="['/editar' , element.id]">more_vert</mat-icon>
         </td>
     </ng-container>
 

@@ -1,16 +1,16 @@
-export interface Usuario 
+export interface Usuario
 {
-    email: string,
-    phoneNumber: string,   
-    nombres: string,
-    apellidos: string,
-    dni: string,
-    idUbigeo: string,
-    direccion: string,
-    genero: string,
-    estado: string,
-    fecha_Nacimiento: string,
-    fecha_Registro: string,
-    uri: string,
-    password: string
+    email: string;
+    phoneNumber: string;
+    nombres: string;
+    apellidos: string;
+    dni: string;
+    ubigeoId: number;
+    direccion: string;
+    genero: string;
+    estado: string;
+    fecha_Nacimiento: Date;
+    fecha_Registro: Date;
+    uri: string;
+    password: string;
 }

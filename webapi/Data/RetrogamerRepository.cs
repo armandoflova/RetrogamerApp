@@ -76,5 +76,72 @@ namespace webapi.Data
             var usuario = await _context.Users.FirstOrDefaultAsync(u => u.Id == idUsuario);
             return usuario;
         }
+
+         public async Task<IEnumerable<Foto>> ObtenerFotos(int idProducto)
+        {
+            var fotos =  _context.Fotos.Where(x => x.ProductoId == idProducto).AsQueryable();
+            fotos = fotos.Where(f => f.Estado == true);
+            return await fotos.ToListAsync();
+        }
+
+        public async Task<Foto> ObtenerFoto(int idFoto)
+        {
+            var foto = await _context.Fotos.FirstOrDefaultAsync(x => x.Id == idFoto);
+            return foto;
+        }
+
+        public async Task<bool> existeProducto(string serie)
+        {
+            if( await _context.Productos.AnyAsync( p => p.Serie == serie)) {
+                return true;
+            }
+
+            return false;
+        }
+        public async Task<bool> existeModelo(string descripcion)
+        {
+            if( await _context.Modelos.AnyAsync( m => m.Descripcion == descripcion)) {
+                return true;
+            }
+
+            return false;
+        }
+        public async Task<bool> existeCategoria(string descripcion)
+        {
+            if( await _context.Categorias.AnyAsync( c => c.Descripcion == descripcion)) {
+                return true;
+            }
+
+            return false;
+        }
+
+           public async Task<Foto> obtenerFotoActual(int idProducto)
+        {
+           var fotoActual = await _context.Fotos.Where(f => f.ProductoId == idProducto).FirstOrDefaultAsync(f => f.EsPrincipal);
+           return fotoActual;
+        }
+
+        public async Task<IEnumerable<object>> ObtenerProductosAdmin()
+        {
+            var producto = await (from p in _context.Productos 
+                            join m in _context.Modelos on 
+                            p.ModeloId equals m.Id
+                            join c in _context.Categorias
+                            on p.CategoriaId equals c.Id
+                            orderby p.Fecha_Registro descending
+                            select new {
+                                Id = p.Id,
+                                Nombre = p.Nombre,
+                                Categoria = c.Descripcion,
+                                Modelo = m.Descripcion,
+                                Marca = p.Marca,
+                                Cantidad = p.Cantidad,
+                                PrecioCompra = p.Precio_Compra,
+                                PrecioVenta = p.Precio_Venta,
+                                Fecha = p.Fecha_Registro,
+                                Estado = p.Estado,
+                            } ).ToListAsync();
+            return producto;
+        }
     }
 }

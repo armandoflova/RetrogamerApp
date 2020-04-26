@@ -29,7 +29,7 @@ export class SubirFotoComponent implements OnInit {
 
   iniciarUpload() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'Retrogamer/' + this.productoId + '/Foto',
+      url: this.baseUrl + 'Admin/' + this.productoId + '/Foto',
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image'],

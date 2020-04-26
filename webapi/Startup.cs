@@ -86,11 +86,9 @@ namespace webapi
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
-                  
-                }).AddFacebook( options => {
-                    options.AppId = Configuration["Authentication:Facebook:AppId"];
-                    options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                
                 });
+                
             // services.AddAuthentication().AddFacebook(options =>
             //         {
             //             options.AppId = Configuration["Authentication:Facebook:AppId"];

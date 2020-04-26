@@ -18,7 +18,12 @@ namespace webapi.Data
 
         public Task<IEnumerable<Ubigeo>> ObtenerUbigeo(int idPadreUbigeo);
         public Task<User> ObtenerUsuario(int idUsuario);
-        
-
+        Task<Foto> ObtenerFoto(int idFoto);
+         Task<bool> existeProducto(string serie);
+         Task<Foto> obtenerFotoActual(int idProducto);
+         Task<bool> existeModelo(string descripcion);
+         Task<bool> existeCategoria(string descripcion);
+         Task<IEnumerable<Foto>> ObtenerFotos(int idProduto);
+         Task<IEnumerable<object>> ObtenerProductosAdmin();
     }
 }

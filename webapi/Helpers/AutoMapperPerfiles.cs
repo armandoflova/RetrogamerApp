@@ -11,6 +11,12 @@ namespace webapi.Helpers
             CreateMap<User , UserReturnDtos>();
             CreateMap<UserRegisterDtos , User>();
             CreateMap<Ubigeo , UbigeoReturnDtos>();
+            CreateMap<CategoriaGuardarDtos , Categoria>();
+            CreateMap<ModeloGuardarDtos , Modelo>();
+            CreateMap<ProductoGuardarDtos , Producto>();
+            CreateMap<FotoGuardarDtos , Foto>();
+            CreateMap<FotosCreacionDtos , Foto>();
+            CreateMap<Foto , FotosReturnDtos>();
         }
     }
 }
