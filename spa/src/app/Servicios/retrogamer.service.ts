@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ProductoPedido } from '../Models/ProductoPedido';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RetrogamerService {
-
+  item: any[] = [];
+  precioTotal = 0;
   constructor(private http: HttpClient) { }
 
   obtenerUbigeos(nroPadre: number) {
@@ -30,7 +32,16 @@ export class RetrogamerService {
   obtenerProducto(idProducto: number) {
     return this.http.get(environment.UrlApi + 'RetroGamer/Producto/' + idProducto);
   }
+  obtenerProductoVenta(idProducto: number) {
+    return this.http.get(environment.UrlApi + 'RetroGamer/ProductoVenta/' + idProducto);
+  }
   obtenerFotos(idProyecto: number) {
-    return this.http.get(environment.UrlApi + 'Retrogamer/' + idProyecto + '/Fotos');
+    return this.http.get(environment.UrlApi + 'RetroGamer/' + idProyecto + '/Fotos');
+  }
+  guardarPedido(userId: number , model: any) {
+    return this.http.post(environment.UrlApi + 'RetroGamer/' + userId + '/Pedido' , model);
+  }
+  obtenerPedidos(userId: number) {
+    return this.http.get(environment + 'RetroGamer/' + userId + '/Pedido');
   }
 }

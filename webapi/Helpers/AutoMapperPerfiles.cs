@@ -1,3 +1,4 @@
+using System.Linq;
 using AutoMapper;
 using webapi.Dtos;
 using webapi.Models;
@@ -17,6 +18,13 @@ namespace webapi.Helpers
             CreateMap<FotoGuardarDtos , Foto>();
             CreateMap<FotosCreacionDtos , Foto>();
             CreateMap<Foto , FotosReturnDtos>();
+            CreateMap<Categoria , CategoriaReturnDtos>();
+            CreateMap<Producto , ProductoReturnDtos>();
+            CreateMap<Producto , ProductoReturnDtos>()
+            .ForMember(dest => dest.urlPrincipal , opt => opt.MapFrom ( src => 
+            src.Fotos.FirstOrDefault( f => f.EsPrincipal).Url));
+            CreateMap<Pedido , PedidoReturnDtos>();
+            CreateMap<PedidoGuardarDtos, Pedido>();
         }
     }
 }

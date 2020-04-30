@@ -55,13 +55,45 @@ namespace webapi.Data
 
         public async Task<Producto> ObtenerProducto(int idProducto)
         {
-            var Producto = await _context.Productos.FirstOrDefaultAsync(p => p.Id == idProducto);
+             var Producto = await _context.Productos.FirstOrDefaultAsync(p => p.Id == idProducto);
+           
             return Producto;
+        }
+        public async Task<object> ObtenerProductoVenta(int idProducto)
+        {
+            // var Producto = await _context.Productos.FirstOrDefaultAsync(p => p.Id == idProducto);
+            var producto = await (from p in _context.Productos
+                            join c in _context.Categorias on
+                            p.CategoriaId equals c.Id 
+                            join m in _context.Modelos on
+                            p.ModeloId equals m.Id
+                            // where p.Id == idProducto
+                            select new {
+                                Id = p.Id,
+                                Nombre = p.Nombre,
+                                Modelo = m.Descripcion,
+                                Categoria = c.Descripcion,
+                                Marca = p.Marca,
+                                Descripcion = p.Descripcion,
+                                Precio_Venta = p.Precio_Venta,
+                                Estado = p.Estado,
+                                Cantidad = p.Cantidad,
+                                CategoriaId = p.CategoriaId,
+                                ModeloId = p.ModeloId,
+                                Fotos = ( from f in p.Fotos
+                                           where f.Estado == true 
+                                            select new {
+                                                Id = p.Id,
+                                                Url = f.Url,
+                                                Descripcion = f.Descripcion
+                                            })
+                            }).FirstOrDefaultAsync(p => p.Id == idProducto);
+            return producto;
         }
 
         public async Task<IEnumerable<Producto>> ObtenerProductos()
         {
-            var productos = await _context.Productos.ToListAsync();
+            var productos = await _context.Productos.Where(p => p.Estado == true).ToListAsync();
             return productos;
         }
 
@@ -142,6 +174,24 @@ namespace webapi.Data
                                 Estado = p.Estado,
                             } ).ToListAsync();
             return producto;
+        }
+
+        public async Task<IEnumerable<Pedido>> ObtenerPedidos()
+        {
+           var pedidos = await _context.Pedidos.ToListAsync();
+           return pedidos;
+        }
+
+        public async Task<Pedido> ObtenerPedido(int idPedido)
+        {
+            var pedido = await _context.Pedidos.FirstOrDefaultAsync(p => p.Id == idPedido);
+            return pedido;
+        }
+
+        public async Task<IEnumerable<Pedido>> ObtenerPedidosUsuario(int idUsuario)
+        {
+            var pedidos = await _context.Pedidos.Where(p => p.UserId == idUsuario).ToListAsync();
+            return pedidos;
         }
     }
 }

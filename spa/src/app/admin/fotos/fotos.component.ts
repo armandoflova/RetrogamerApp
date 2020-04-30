@@ -66,7 +66,7 @@ export class FotosComponent implements OnInit {
     foto.estado = !foto.estado;
     this.admin.cambiarEstadoFoto(foto.id , foto).subscribe( () => {
      const sncakbarRef = this.ui.openSnackBar('se elimino Foto' , 'DESHACER' , 3000);
-     var i = this.fotos.indexOf(foto , 0);
+     const i = this.fotos.indexOf(foto , 0);
      this.fotos.splice(i, 1);
      sncakbarRef.onAction().subscribe(() => this.cambiarEstado(foto));
     }, error => {
@@ -90,7 +90,7 @@ export class FotosComponent implements OnInit {
         this.fotoactual.esPrincipal = false;
         foto.esPrincipal = true;
         this.ui.openSnackBar('Se establecio como Foto Principal' , null, 3000);
-    },error => {
+    }, error => {
         this.ui.openSnackBar(error , null, 3000);
         console.log(error);
     });

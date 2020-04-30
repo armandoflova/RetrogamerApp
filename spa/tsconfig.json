@@ -11,7 +11,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     // se cambio es2015 a es5
-    "target": "es5",
+    "target": "es2015",
     "lib": [
       "es2018",
       "dom"

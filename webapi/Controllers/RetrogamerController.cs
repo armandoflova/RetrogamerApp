@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using webapi.Data;
 using webapi.Dtos;
+using webapi.Models;
 
 namespace webapi.Controllers
 {
@@ -22,12 +25,14 @@ namespace webapi.Controllers
         [HttpGet ("Categoria/{idCategoria}")]
         public async Task<IActionResult> obtenerCategoria(int idCategoria) {
             var categoria = await _repo.ObtenerCategoria(idCategoria);
-            return Ok(categoria);
+            var categoriaReturn = _mapper.Map<CategoriaReturnDtos>(categoria);
+            return Ok(categoriaReturn);
         }
         [HttpGet ("Categoria")]
         public async Task<IActionResult> obtenerCategorias() {
             var categorias = await _repo.ObtenerCategorias();
-            return Ok(categorias);
+            var categoriasReturn = _mapper.Map<IEnumerable<CategoriaReturnDtos>>(categorias);
+            return Ok(categoriasReturn);
         }
         [HttpGet ("Modelo/{idModelo}")]
         public async Task<IActionResult> obtenerModelo(int idModelo) {
@@ -42,12 +47,19 @@ namespace webapi.Controllers
         [HttpGet ("Producto/{idProducto}")]
         public async Task<IActionResult> obtenerProducto(int idProducto) {
             var Producto = await _repo.ObtenerProducto(idProducto);
-            return Ok(Producto);
+            var productoreturn = _mapper.Map<ProductoReturnDtos>(Producto);
+            return Ok(productoreturn);
+        }
+        [HttpGet ("ProductoVenta/{idProducto}")]
+        public async Task<IActionResult> obtenerProductoVenta(int idProducto) {
+            var productoVenta = await _repo.ObtenerProductoVenta(idProducto);
+            return Ok(productoVenta);
         }
         [HttpGet ("Producto")]
         public async Task<IActionResult> obtenerProductos() {
             var Productos = await _repo.ObtenerProductos();
-            return Ok(Productos);
+            var productosReturn = _mapper.Map<IEnumerable<ProductoReturnDtos>>(Productos);
+            return Ok(productosReturn);
         }
         [HttpGet ("Ubigeo/{idPadreUbigeo}")]
         public async Task<IActionResult> obtenerUbigeos(int idPadreUbigeo) {
@@ -64,6 +76,31 @@ namespace webapi.Controllers
             var fotosReturn = _mapper.Map<IEnumerable<FotosReturnDtos>>(fotos);
             return Ok(fotosReturn);
         }
+         [HttpGet("{usuarioId}/Pedido")]
+
+        public async Task<IActionResult> ObtenerPedido(int usuarioId)
+        {
+            var pedidos = await _repo.ObtenerPedidosUsuario(usuarioId);
+            var pedidosReturn = _mapper.Map<IEnumerable<PedidoReturnDtos>>(pedidos);
+            return Ok(pedidosReturn);
+        }
+
+        [HttpPost("{usuarioId}/Pedido")]
+
+        public async Task<IActionResult> GuardarPedido(int usuarioId , PedidoGuardarDtos pedidoGuardar ) {
+             if (usuarioId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                 return Unauthorized();
+            
+             var  CrearPedido= _mapper.Map<Pedido>(pedidoGuardar);
+            _repo.Agregar(CrearPedido);
+
+            if (await _repo.GuardarTodo())
+                return Ok();
+            throw new Exception("no se pudo guardar");
+            
+        }
+
+        
 
         
 

@@ -83,8 +83,8 @@
 
 
             <button type="button" mat-button class="mr-3" [routerLink]="['/admin']"> < Anterior </button>
-            <button type="submit" mat-raised-button color="primary" [disabled]="!productoGuadar.dirty"><i class="fa fa-edit"></i> Editar ></button>
-            <button type="button" mat-button class="mr-3" [routerLink]="['/fotos', producto.id]"> Siguiente > </button>
+            <button type="submit" mat-raised-button color="primary" class="mr-3" [disabled]="!productoGuadar.dirty"><i class="fa fa-edit"></i> Editar ></button>
+            <button type="button" mat-button [routerLink]="['/fotos', producto.id]"> Siguiente > </button>
         </form>
     </div>
 

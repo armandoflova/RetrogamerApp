@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxGalleryModule } from 'ngx-gallery-9';
 import { FileUploadModule } from 'ng2-file-upload';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatSliderModule } from '@angular/material/slider';
@@ -38,6 +39,9 @@ import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { HasRoleDirective } from './Directivas/has-role.directive';
 import { FotosComponent } from './admin/fotos/fotos.component';
+import { ProductoComponent } from './producto/producto.component';
+import { CategoriaProductoComponent } from './categoria-producto/categoria-producto.component';
+import 'hammerjs';
 
 // tslint:disable-next-line: prefer-const
 let config = new AuthServiceConfig([
@@ -58,6 +62,13 @@ export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
+// export class CustomHammerConfig extends HammerGestureConfig {
+//   overrides = {
+//     pinch: { enable: false },
+//     rotate: { enable: false }
+//   };
+// }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +86,9 @@ export function tokenGetter() {
     EditProductComponent,
     SubirFotoComponent,
     HasRoleDirective,
-    FotosComponent
+    FotosComponent,
+    ProductoComponent,
+    CategoriaProductoComponent
   ],
   imports: [
     BrowserModule,
@@ -101,6 +114,7 @@ export function tokenGetter() {
     MatIconModule,
     SocialLoginModule,
     FileUploadModule,
+    NgxGalleryModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
@@ -114,6 +128,7 @@ export function tokenGetter() {
       provide: AuthServiceConfig,
       useFactory: provideConfig
     }
+   // { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ],
   bootstrap: [AppComponent]
 })
