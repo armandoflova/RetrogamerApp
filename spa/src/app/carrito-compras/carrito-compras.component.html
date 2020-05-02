@@ -1,0 +1,64 @@
+<h1 class="text-center mt-3">Detalle del Pedido</h1>
+<div class="row">
+    <div class="col-md-12" *ngIf="retrogamer.item.length == 0">
+        <div class="alert alert-warning" role="alert">
+            No tiene ningun Producto Seleccionado para comprar
+        </div>
+        <button mat-raised-button color="primary" class="btn btn-block" [routerLink]="['/home']">Regresar</button>
+    </div>
+</div>
+<div class="row" *ngIf="retrogamer.item.length > 0">
+    <div class="col-md-8">
+        <div class="example-container mat-elevation-z8 mt-3">
+            <table mat-table [dataSource]="dataSource">
+                <!-- Item Column -->
+                <ng-container matColumnDef="Producto">
+                    <th mat-header-cell *matHeaderCellDef> Producto </th>
+                    <td mat-cell *matCellDef="let producto"> {{producto.nombre}} </td>
+                    <td mat-footer-cell *matFooterCellDef> Total </td>
+                </ng-container>
+                <!-- Item Column -->
+                <ng-container matColumnDef="Marca">
+                    <th mat-header-cell *matHeaderCellDef> Marca </th>
+                    <td mat-cell *matCellDef="let producto"> {{producto.marca}} </td>
+                    <td mat-footer-cell *matFooterCellDef> Total </td>
+                </ng-container>
+                <!-- Item Column -->
+                <ng-container matColumnDef="Modelo">
+                    <th mat-header-cell *matHeaderCellDef> Modelo </th>
+                    <td mat-cell *matCellDef="let producto"> {{producto.modelo}} </td>
+                    <td mat-footer-cell *matFooterCellDef> Total </td>
+                </ng-container>
+                <!-- Cost Column -->
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+                    <td mat-cell *matCellDef="let producto" (click)="eliminarItem(producto)" class=text-danger> <i class="fa fa-trash"></i> Eliminar</td>
+                    <td mat-footer-cell *matFooterCellDef> Total </td>
+                </ng-container>
+                <ng-container matColumnDef="Precio">
+                    <th mat-header-cell *matHeaderCellDef> Precio </th>
+                    <td mat-cell *matCellDef="let producto"> S/{{producto.precio}} </td>
+                    <td mat-footer-cell *matFooterCellDef> S/{{getTotalCost()}} </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        Tiene <strong class="text-success">{{retrogamer.item.length}}</strong> Items por el precio total de
+        <strong class="text-success">
+                S/{{getTotalCost()}}
+            </strong>
+        <button mat-raised-button color="primary" class="btn btn-block" [disabled]="retrogamer.precioTotal == 0">Pagar S/ {{retrogamer.precioTotal}}</button>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-md-3">
+        <button mat-button [routerLink]="['/home']"> < Regresar</button>
+    </div>
+</div>

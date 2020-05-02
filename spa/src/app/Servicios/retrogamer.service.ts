@@ -44,4 +44,8 @@ export class RetrogamerService {
   obtenerPedidos(userId: number) {
     return this.http.get(environment + 'RetroGamer/' + userId + '/Pedido');
   }
+  agregarCarrito(productoPedido: any) {
+    this.item.push(productoPedido);
+    this.precioTotal += productoPedido.precio;
+  }
 }

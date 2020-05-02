@@ -9,12 +9,14 @@ import { AuthGuard } from './Servicios/auth.guard';
 import { FotosComponent } from './admin/fotos/fotos.component';
 import { EditProductComponent } from './admin/edit-product/edit-product.component';
 import { ProductoComponent } from './producto/producto.component';
+import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 
 
 const routes: Routes = [
   {path: '' , component: HomeComponent},
   {path: 'registro' , component: RegistroComponent},
   {path: 'producto/:id' , component: ProductoComponent},
+  {path: 'carrito' , component: CarritoComprasComponent},
   {path: '' ,
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],

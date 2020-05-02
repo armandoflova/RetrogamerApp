@@ -42,6 +42,7 @@ import { FotosComponent } from './admin/fotos/fotos.component';
 import { ProductoComponent } from './producto/producto.component';
 import { CategoriaProductoComponent } from './categoria-producto/categoria-producto.component';
 import 'hammerjs';
+import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 
 // tslint:disable-next-line: prefer-const
 let config = new AuthServiceConfig([
@@ -88,7 +89,8 @@ export function tokenGetter() {
     HasRoleDirective,
     FotosComponent,
     ProductoComponent,
-    CategoriaProductoComponent
+    CategoriaProductoComponent,
+    CarritoComprasComponent
   ],
   imports: [
     BrowserModule,

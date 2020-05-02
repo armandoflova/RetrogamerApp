@@ -1,8 +1,8 @@
 <div class="row mt-4">
     <div class="col-md-12 text-center" *ngIf="retrogamer.item.length > 0">
-        <button mat-raised-button color="primary"><i class="fa fa-cart-plus fa-5x"></i></button>
+        <button mat-raised-button color="primary" [routerLink]="['/carrito']"><i class="fa fa-cart-plus fa-5x"></i></button>
         <div>
-            Tiene <strong class="text-success">{{retrogamer.item.length}}</strong> Items por el preico total de
+            Tiene <strong class="text-success">{{retrogamer.item.length}}</strong> Items por el precio total de
             <strong class="text-success">
                 S/{{retrogamer.precioTotal}}
             </strong>
@@ -18,20 +18,20 @@
         <h3><strong>Marca: </strong>{{producto?.marca}} / {{producto?.modelo}}</h3>
         <pre>{{producto?.descripcion}}</pre>
         <h1><strong>Precio: </strong>S/{{producto?.precio_Venta}}</h1>
-        <button class="btn btn-secondary" *ngIf="auth.decodedToken?.nameid" [disabled]="productoAgregado(producto)" (click)="agregarCarrito(producto)"><i class="fa fa-cart-plus"></i> Añadir al Carrito</button>
+        <button class="btn btn-secondary" *ngIf="auth.decodedToken?.nameid" [disabled]="!habilitado" (click)="agregarCarrito(producto)"><i class="fa fa-cart-plus"></i> Añadir al Carrito</button>
         <button class="btn btn-secondary" disabled *ngIf="!auth.decodedToken?.nameid"><i class="fa fa-user" ></i> Inicia Sesion para poder Comprar</button>
     </div>
 
 </div>
 <hr>
-<div class="row mt-2 mb-3">
+<div class="row mt-2">
     <div class="col-md-6">
         <h3>Tenemos <strong>mas {{categoria?.descripcion}}</strong></h3>
     </div>
     <div class="col-md-6">
         otros Productos
         <mat-chip-list aria-label="Fish selection">
-            <mat-chip color="primary" selected *ngFor="let categoria of categorias" (click)="obtenerCategoriaChip(categoria.id)">{{categoria.descripcion}}</mat-chip>
+            <mat-chip color="primary" selected *ngFor="let categoria of categorias" (click)="obtenerCategoria(categoria.id)">{{categoria.descripcion}}</mat-chip>
         </mat-chip-list>
 
     </div>
