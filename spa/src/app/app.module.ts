@@ -43,6 +43,7 @@ import { ProductoComponent } from './producto/producto.component';
 import { CategoriaProductoComponent } from './categoria-producto/categoria-producto.component';
 import 'hammerjs';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
+import { ErrorInterceptor, ErrorInterceptorProvider } from './Servicios/error.interceptor';
 
 // tslint:disable-next-line: prefer-const
 let config = new AuthServiceConfig([
@@ -126,6 +127,7 @@ export function tokenGetter() {
     })
   ],
   providers: [
+    ErrorInterceptorProvider,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

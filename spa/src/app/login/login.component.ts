@@ -4,6 +4,7 @@ import { Authorization } from '../Servicios/authorization.service';
 import { Router } from '@angular/router';
 import { SocialUser, AuthService, GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { Usuario } from '../Models/Usuario';
+import { UIService } from '../Servicios/ui.service';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,8 @@ export class LoginComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
               public authorization: Authorization,
               public router: Router,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private ui: UIService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -49,15 +51,15 @@ export class LoginComponent implements OnInit {
     this.authorization.login(this.model).subscribe( () => {
        this.dialogRef.close();
     }, error => {
-      console.log(error);
+     this.ui.openSnackBar(error , null , 3000);
     });
   }
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).finally( () => {
       this.usuario.nombres = this.user.firstName;
-      this.usuario.apellidos= this.user.lastName;
-      this.usuario.email= this.user.email;
+      this.usuario.apellidos = this.user.lastName;
+      this.usuario.email = this.user.email;
       this.usuario.uri = this.user.photoUrl;
       this.usuario.direccion = this.user.provider;
       this.usuario.password= this.user.id + this.user.email;

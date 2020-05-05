@@ -44,8 +44,8 @@
         <div class="col-lg-4" *ngFor="let producto of productos">
             <img [src]="producto.urlPrincipal" class="bd-placeholder-img rounded-circle" width="140" height="140" alt="producto1">
             <h2>{{producto.nombre}}</h2>
-            <h3>{{producto.marca}}</h3>
-            <h1>S/{{producto.precio_Venta}}</h1>
+            <h3>Marca: {{producto.marca}}</h3>
+            <h1>Precio: S/{{producto.precio_Venta}}</h1>
             <p><a class="btn btn-secondary" role="button" (click)="obtenerProductoSeleccionado(producto)">Ver Detalles &raquo;</a></p>
         </div>
         <!-- /.col-lg-4 -->

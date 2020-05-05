@@ -12,8 +12,8 @@
                     <div class="mb-3 pics animation">
                         <img class="img-fluid" [src]="foto.url" [alt]="producto.marca" [class.esPrincipal]="foto.esPrincipal">
                         <ul class="list-inline foto-iconos animate text-center">
-                            <li class="list-inline-item"><button mat-raised-button color="primary" (click)="FotoPrincipal(foto)"><i class="fa fa-heart"></i></button></li>
-                            <li class="list-inline-item"><button mat-raised-button color="primary"><i class="fa fa-trash" (click)="eliminarFoto(foto)"></i></button></li>
+                            <li class="list-inline-item"><button class="btn btn-info btn-sm" (click)="FotoPrincipal(foto)"><i class="fa fa-heart"></i></button></li>
+                            <li class="list-inline-item"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" (click)="eliminarFoto(foto)"></i></button></li>
                         </ul>
                     </div>
                 </div>

@@ -93,13 +93,15 @@ namespace webapi.Data
 
         public async Task<IEnumerable<Producto>> ObtenerProductos()
         {
-            var productos = await _context.Productos.Where(p => p.Estado == true).ToListAsync();
+            var productos = await _context.Productos.Where(p => p.Estado == true)
+                            .OrderByDescending(p => p.Fecha_Registro).ToListAsync();
             return productos;
         }
 
         public async Task<IEnumerable<Ubigeo>> ObtenerUbigeo(int idPadreUbigeo)
         {
-            var ubigeos = await _context.Ubigeos.Where(u => u.id_padre_ubigeo == idPadreUbigeo).ToListAsync();
+            var ubigeos = await _context.Ubigeos.Where(u => u.id_padre_ubigeo == idPadreUbigeo)
+                            .OrderByDescending(u => u.nombre_ubigeo).ToListAsync();
             return ubigeos;
         }
 
