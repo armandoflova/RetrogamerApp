@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../Servicios/admin.service';
 import { UIService } from '../../Servicios/ui.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Authorization } from '../../Servicios/authorization.service';
 
 @Component({
   selector: 'app-fotos',
@@ -20,7 +21,8 @@ export class FotosComponent implements OnInit {
               private retrogamer: RetrogamerService,
               private router: ActivatedRoute,
               private admin: AdminService,
-              private ui: UIService) { }
+              private ui: UIService,
+              private aut: Authorization) { }
 
   ngOnInit() {
     this.producto = {
@@ -34,7 +36,7 @@ export class FotosComponent implements OnInit {
       precio_Venta: 0,
       cantidad: 0,
       urlPrincipal: '',
-      userId: 2,
+      userId: +this.aut.decodedToken.nameid,
       modeloId: 0,
       categoriaId: 0
     };

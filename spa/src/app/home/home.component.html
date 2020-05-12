@@ -63,7 +63,7 @@
     <!--/.Carousel Wrapper-->
     <div class="mt-3">
         <mat-chip-list aria-label="Fish selection">
-            <mat-chip color="primary" selected *ngFor="let categoria of catgeorias">{{categoria.descripcion}}</mat-chip>
+            <mat-chip color="primary" selected *ngFor="let categoria of catgeorias" (click)="obtenerCategoria(categoria.id)">{{categoria.descripcion}}</mat-chip>
         </mat-chip-list>
     </div>
 

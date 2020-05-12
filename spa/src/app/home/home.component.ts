@@ -11,6 +11,7 @@ import { Categoria } from '../Models/Categoria';
 export class HomeComponent implements OnInit {
   productos: Producto[] = [];
   catgeorias: Categoria[] = [];
+  categoria: Categoria;
   constructor(private retrogamer: RetrogamerService) { }
 
   ngOnInit(): void {
@@ -25,6 +26,12 @@ export class HomeComponent implements OnInit {
   obtenerCategorias() {
     this.retrogamer.obtenerCategorias().subscribe((categorias: Categoria[]) => {
       this.catgeorias = categorias;
+    });
+  }
+  obtenerCategoria(id: number) {
+    this.retrogamer.obtenerCategoria(id).subscribe( (result: Categoria) => {
+      this.categoria = result;
+      this.productos = this.categoria.productos;
     });
   }
 }

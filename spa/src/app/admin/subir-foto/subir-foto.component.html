@@ -9,6 +9,9 @@
 
         <input type="file" ng2FileSelect [uploader]="uploader" />
     </div>
+    <div class="col-md-12 mt-3">
+        <button class="btn btn-primary btn-block" [routerLink]="['/admin']">Volver al Panel</button>
+    </div>
 </div>
 <div class="row mt-3">
     <div class="col-md-12" style="margin-bottom: 40px" *ngIf="uploader.queue?.length">
