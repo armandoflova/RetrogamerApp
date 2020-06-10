@@ -41,7 +41,7 @@ namespace webapi
             services.AddDbContext<DataContext>(x => 
             {
                 x.UseLazyLoadingProxies();
-                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                x.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
             });
                 
             ConfigureServices(services);
@@ -52,7 +52,7 @@ namespace webapi
             services.AddDbContext<DataContext>(x => 
             {
                 x.UseLazyLoadingProxies();
-                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                x.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             ConfigureServices(services);
