@@ -38,6 +38,9 @@ namespace webapi.Controllers
         public async Task<IActionResult> Loguear(UserLoginDtos usuarioLogin)
         {
             var usuario = await _userManager.FindByEmailAsync(usuarioLogin.Email);
+            if(usuario == null) {
+                return BadRequest("No Existe usuario");
+            }
 
             var result = await _signInManager.CheckPasswordSignInAsync(usuario, usuarioLogin.Password, false);
 

@@ -17,10 +17,10 @@
                 "name": "Linux",
                 "description": "SFTP folder",
 
-                "host": "161.35.127.204", "port": 22,
+                "host": "157.245.142.192", "port": 22,
                 "user": "root", "password": "fvsa123fvsa",
 
-                "dir": "/var/retrogamerapp",
+                "dir": "/var/retrogamerapp/",
                 "mappings": {
                     "webapi/bin/Release/netcoreapp3.1/publish/**": "/"
                 }

@@ -76,7 +76,7 @@ export class AddProductComponent implements OnInit {
       estado: [false],
       precio_Compra: [0 , Validators.required],
       precio_Venta: [0 , Validators.required],
-      userId: [2],
+      userId: [this.auth.decodedToken.nameid],
     });
   }
 

@@ -72,7 +72,6 @@ export class ProductoComponent implements OnInit {
   obtenerProducto(idProducto: number) {
     this.retrogamer.obtenerProductoVenta(idProducto).subscribe((result: any) => {
       this.producto = result;
-      console.log(this.producto);
       this.obtenerCategoria(this.producto.categoriaId);
       this.fotos = this.producto.fotos;
       this.galleryImages = this.getImages();
@@ -140,7 +139,6 @@ export class ProductoComponent implements OnInit {
       }
       });
       this.habilitado = estaHabilitado;
-      console.log(this.habilitado);
   }
 }
 

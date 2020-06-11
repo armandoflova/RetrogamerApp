@@ -20,7 +20,6 @@ export class AddCategoriaComponent implements OnInit {
   }
   agregarCategoria() {
     this.admin.agregarCategoria(this.categoria).subscribe( () => {
-      console.log('Se guardo de manera Correcta');
       this.dialogRef.close();
     }, error => {
       console.log(error);

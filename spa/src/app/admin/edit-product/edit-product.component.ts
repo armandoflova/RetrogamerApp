@@ -53,7 +53,6 @@ export class EditProductComponent implements OnInit {
     this.obtenerModelos();
     this.CrearFormularioProducto();
     this.id = this.router.snapshot.params.id;
-    console.log(this.id);
     this.obetenerProducto();
 
   }
@@ -61,7 +60,6 @@ export class EditProductComponent implements OnInit {
   obetenerProducto() {
     this.retrogamer.obtenerProducto(this.id).subscribe( (result: Producto) => {
       this.producto = result;
-      console.log(this.producto);
       this.CrearFormularioProducto();
     }, error => {
       this.ui.openSnackBar(error , null , 3000);
@@ -137,7 +135,6 @@ export class EditProductComponent implements OnInit {
 
   editarProducto() {
     this.producto = Object.assign( {} , this.productoGuadar.value);
-    console.log(this.producto);
     this.producto.cantidad = 1;
     this.admin.editarProducto(this.producto.id , this.producto).subscribe( () => {
      this.productoGuadar.reset(this.producto);

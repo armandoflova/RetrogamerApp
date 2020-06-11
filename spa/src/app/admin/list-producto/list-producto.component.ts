@@ -26,8 +26,6 @@ export class ListProductoComponent implements OnInit {
  obtenerProductos() {
     this.admin.obtenerProducto().subscribe((result: any[]) => {
       this.productos = result;
-      console.log(this.productos);
-      
       this.dataSource.data = this.productos;
     });
  }

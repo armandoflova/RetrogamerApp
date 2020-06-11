@@ -54,8 +54,7 @@ export class FotosComponent implements OnInit {
   obtenerFotos() {
     this.retrogamer.obtenerFotos(this.producto.id).subscribe ( (result: Foto[]) => {
       this.fotos = result;
-      console.log(this.fotos);
-    } , error => {
+      } , error => {
       this.ui.openSnackBar(error , null , 3000);
     });
   }
@@ -82,7 +81,6 @@ export class FotosComponent implements OnInit {
       this.fotos.push(foto);
     }, error => {
       this.ui.openSnackBar(error , null , 3000);
-      console.log(error);
     });
   }
 
@@ -94,7 +92,6 @@ export class FotosComponent implements OnInit {
         this.ui.openSnackBar('Se establecio como Foto Principal' , null, 3000);
     }, error => {
         this.ui.openSnackBar(error , null, 3000);
-        console.log(error);
     });
   }
 }

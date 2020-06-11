@@ -27,12 +27,10 @@ export class CarritoComprasComponent implements OnInit {
     return this.productos.map(p => p.precio).reduce((acc, value) => acc + value, 0);
   }
   eliminarItem(producto: any) {
-    debugger;
     let i = this.productos.indexOf(producto, 0);
     this.retrogamer.item.splice(i , 1);
     this.productos.splice(i , 1);
     this.cargarTabla();
     this.retrogamer.precioTotal = this.getTotalCost();
-    console.log(this.productos);
   }
 }
