@@ -6,7 +6,7 @@ import { Authorization } from '../Servicios/authorization.service';
 import { Categoria } from '../Models/Categoria';
 import { Producto } from '../Models/Producto';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery-9';
-import { ProductoPedido } from '../Models/ProductoPedido';
+
 
 
 @Component({
