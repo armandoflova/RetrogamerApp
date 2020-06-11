@@ -19,7 +19,7 @@ export class ProductoComponent implements OnInit {
   galleryImages: NgxGalleryImage[];
   habilitado = true;
   idProducto: number;
-  producto: any;
+  producto: any = {};
   fotos: any = [];
   productos: Producto[] = [];
   categoria: Categoria;
