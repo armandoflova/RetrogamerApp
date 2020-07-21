@@ -41,7 +41,7 @@ namespace webapi
             services.AddDbContext<DataContext>(x => 
             {
                 x.UseLazyLoadingProxies();
-                x.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
                 
             ConfigureServices(services);
@@ -52,7 +52,7 @@ namespace webapi
             services.AddDbContext<DataContext>(x => 
             {
                 x.UseLazyLoadingProxies();
-                x.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             ConfigureServices(services);
@@ -96,7 +96,7 @@ namespace webapi
             //            // options.AccessDeniedPath = "/AccessDeniedPathInfo";
             //         }); 
             services.AddAuthorization( options => {
-                options.AddPolicy("RequireAdminRole" , policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireAdminRole" , policy => policy.RequireRole("Administrador"));
             });
 
             services.AddControllers().AddNewtonsoftJson(opt => 

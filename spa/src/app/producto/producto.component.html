@@ -2,9 +2,9 @@
     <div class="col-md-12 text-center" *ngIf="retrogamer.item.length > 0">
         <button mat-raised-button color="primary" [routerLink]="['/carrito']"><i class="fa fa-cart-plus fa-5x"></i></button>
         <div>
-            Tiene <strong class="text-success">{{retrogamer.item.length}}</strong> Items por el precio total de
+            Tiene <strong class="text-success">{{retrogamer?.item.length}}</strong> Items por el precio total de
             <strong class="text-success">
-                S/{{retrogamer.precioTotal}}
+                S/{{retrogamer?.precioTotal}}
             </strong>
         </div>
     </div>
@@ -43,9 +43,9 @@
     <div class="row">
         <div class="col-lg-4" *ngFor="let producto of productos">
             <img [src]="producto.urlPrincipal" class="bd-placeholder-img rounded-circle" width="140" height="140" alt="producto1">
-            <h2>{{producto.nombre}}</h2>
-            <h3>Marca: {{producto.marca}}</h3>
-            <h1>Precio: S/{{producto.precio_Venta}}</h1>
+            <h2>{{producto?.nombre}}</h2>
+            <h3>Marca: {{producto?.marca}}</h3>
+            <h1>Precio: S/{{producto?.precio_Venta}}</h1>
             <p><a class="btn btn-secondary" role="button" (click)="obtenerProductoSeleccionado(producto)">Ver Detalles &raquo;</a></p>
         </div>
         <!-- /.col-lg-4 -->

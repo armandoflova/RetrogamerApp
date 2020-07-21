@@ -25,7 +25,7 @@ export class ProductoComponent implements OnInit {
   categoria: Categoria;
   categorias: Categoria[] = [];
   productoPedido: any = {
-    id: null,
+    id: 0,
     productoId: 0,
     precio: 0,
     descuento: 0,
@@ -72,6 +72,7 @@ export class ProductoComponent implements OnInit {
   obtenerProducto(idProducto: number) {
     this.retrogamer.obtenerProductoVenta(idProducto).subscribe((result: any) => {
       this.producto = result;
+      console.log(idProducto, this.producto);
       this.obtenerCategoria(this.producto.categoriaId);
       this.fotos = this.producto.fotos;
       this.galleryImages = this.getImages();

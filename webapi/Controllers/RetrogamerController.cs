@@ -10,6 +10,7 @@ using webapi.Models;
 
 namespace webapi.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class RetrogamerController : ControllerBase

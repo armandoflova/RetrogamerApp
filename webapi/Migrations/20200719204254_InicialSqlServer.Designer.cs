@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapi.Data;
@@ -9,27 +10,29 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200610153711_DBMysqlServer")]
-    partial class DBMysqlServer
+    [Migration("20200719204254_InicialSqlServer")]
+    partial class InicialSqlServer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -45,13 +48,14 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -66,13 +70,13 @@ namespace webapi.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -90,13 +94,13 @@ namespace webapi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -107,10 +111,11 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -121,25 +126,26 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("EsPrincipal")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Estado")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Url")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -152,10 +158,11 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -166,19 +173,20 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Estado")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("Fecha_Entrega")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Fecha_Registro")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<float>("PrecioTotal")
-                        .HasColumnType("float");
+                        .HasColumnType("real");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -194,7 +202,8 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
@@ -203,37 +212,37 @@ namespace webapi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Estado")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("Fecha_Registro")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Marca")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ModeloId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Precio_Compra")
-                        .HasColumnType("float");
+                        .HasColumnType("real");
 
                     b.Property<float>("Precio_Venta")
-                        .HasColumnType("float");
+                        .HasColumnType("real");
 
                     b.Property<string>("Serie")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<string>("urlPrincipal")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -255,13 +264,13 @@ namespace webapi.Migrations
                         .HasColumnType("int");
 
                     b.Property<float>("Descuento")
-                        .HasColumnType("float");
+                        .HasColumnType("real");
 
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<float>("Precio")
-                        .HasColumnType("float");
+                        .HasColumnType("real");
 
                     b.HasKey("ProductoId", "PedidoId");
 
@@ -274,25 +283,27 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -301,16 +312,17 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("buscador_ubigeo")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("codigo_ubigeo")
                         .HasColumnType("int");
 
                     b.Property<string>("etiqueta_ubigeo")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("id_padre_ubigeo")
                         .HasColumnType("int");
@@ -322,7 +334,7 @@ namespace webapi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("nombre_ubigeo")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("numero_hijos_ubigeo")
                         .HasColumnType("int");
@@ -336,83 +348,84 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("Apellidos")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DNI")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Estado")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("Fecha_Nacimiento")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Fecha_Registro")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Genero")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Nombres")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<int>("UbigeoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Uri")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -422,7 +435,8 @@ namespace webapi.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("UbigeoId");
 
