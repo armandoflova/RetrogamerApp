@@ -71,32 +71,16 @@
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <div class="container marketing mt-3">
+    <div class="marketing mt-3">
 
         <!-- Three columns of text below the carousel -->
-        <div class="row">
-            <div class="col-lg-4" *ngFor="let producto of productos">
-                <img [src]="producto.urlPrincipal" class="bd-placeholder-img rounded-circle" width="140" height="140" alt="producto1">
-                <h2>{{producto.nombre}}</h2>
-                <h3>Marca: {{producto.marca}}</h3>
-                <h1>Precio: S/{{producto.precio_Venta}}</h1>
-                <p><a class="btn btn-secondary" role="button" [routerLink]="['/producto' , producto.id]">Ver Detalles &raquo;</a></p>
+        <div class="row ">
+            <div class="col-lg-4 d-flex flex-column align-items-center justify-content-center" *ngFor="let producto of productos">
+
+                <img [src]="producto?.urlPrincipal" class="img-circle" style="width: 140px; height: 140px;">
+                <p class="precio">{{producto.precio_Venta | currency}}</p>
+                <p><a class="btn btn-secondary" [routerLink]="['/producto' , producto.id]" role="button">Ver Detalles »</a></p>
             </div>
-            <!-- /.col-lg-4 -->
-            <!-- <div class="col-lg-4">
-                <img src="../../assets/img/accessory-buttons-console-control-275033.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140" alt="producto1">
-                <h2>Heading</h2>
-                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div> -->
-            <!-- /.col-lg-4 -->
-            <!-- <div class="col-lg-4">
-                <img src="../../assets/img/accessory-buttons-console-control-275033.jpg" class="bd-placeholder-img rounded-circle" width="140" height="140" alt="producto1">
-                <h2>Heading</h2>
-                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div> -->
-            <!-- /.col-lg-4 -->
         </div>
         <!-- /.row -->
 

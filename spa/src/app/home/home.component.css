@@ -43,3 +43,18 @@
         margin-top: 7rem;
     }
 }
+
+.marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.img-circle {
+    border-radius: 100%;
+}
+
+.precio {
+    margin-top: 1rem;
+    font-size: 24px;
+    color: crimson;
+}

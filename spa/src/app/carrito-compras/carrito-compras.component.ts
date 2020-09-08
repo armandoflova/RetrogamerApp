@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RetrogamerService } from '../Servicios/retrogamer.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { FormularioUsuarioComponent } from './formulario-usuario/formulario-usuario.component';
 
+declare var paypal;
 
 @Component({
   selector: 'app-carrito-compras',
@@ -14,9 +17,44 @@ export class CarritoComprasComponent implements OnInit {
   displayedColumns = ['Producto', 'Marca' , 'Modelo' , 'Precio' , 'acciones'];
   productos: any[] = [];
   dataSource = new MatTableDataSource();
-  constructor(public retrogamer: RetrogamerService) { }
+  @ViewChild('paypal', { static: true }) paypalElement : ElementRef;
+
+  producto = {
+    descripcion : 'producto en venta',
+    precio      : 599.99,
+    img         : 'imagen de tu producto'
+  };
+  constructor(public retrogamer: RetrogamerService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    paypal
+    .Buttons({
+      createOrder: (data, actions) => {
+        console.log(actions);
+        
+        return actions.order.create({
+          purchase_units: [
+            {
+              description: this.producto.descripcion,
+              amount     : {
+                currency_code: 'USD',
+                value        : this.producto.precio
+              }
+            }
+          ]
+        })
+      },
+      onApprove: async (data, actions) => {
+        const order = await actions.order.capture();
+        console.log(order);
+
+      },
+      onError: err =>{
+        console.log(err);
+      }
+    })
+    .render( this.paypalElement.nativeElement );
     this.cargarTabla();
   }
   cargarTabla() {
@@ -32,5 +70,12 @@ export class CarritoComprasComponent implements OnInit {
     this.productos.splice(i , 1);
     this.cargarTabla();
     this.retrogamer.precioTotal = this.getTotalCost();
+  }
+  RegistrarUsuario() {
+    const DialogRef = this.dialog.open(FormularioUsuarioComponent , {
+
+    }).afterClosed( ).subscribe(() => {
+
+    });
   }
 }

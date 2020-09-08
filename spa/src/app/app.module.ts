@@ -44,6 +44,7 @@ import { CategoriaProductoComponent } from './categoria-producto/categoria-produ
 import 'hammerjs';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 import { ErrorInterceptor, ErrorInterceptorProvider } from './Servicios/error.interceptor';
+import { FormularioUsuarioComponent } from './carrito-compras/formulario-usuario/formulario-usuario.component';
 
 // tslint:disable-next-line: prefer-const
 let config = new AuthServiceConfig([
@@ -91,7 +92,8 @@ export function tokenGetter() {
     FotosComponent,
     ProductoComponent,
     CategoriaProductoComponent,
-    CarritoComprasComponent
+    CarritoComprasComponent,
+    FormularioUsuarioComponent
   ],
   imports: [
     BrowserModule,

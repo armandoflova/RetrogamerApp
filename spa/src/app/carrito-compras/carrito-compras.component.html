@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="row" *ngIf="retrogamer.item.length > 0">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="example-container mat-elevation-z8 mt-3">
             <table mat-table [dataSource]="dataSource">
                 <!-- Item Column -->
@@ -49,12 +49,23 @@
         </div>
 
     </div>
-    <div class="col-md-4">
+
+</div>
+<div class="row mt-2">
+    <div class="col-md-6">
         Tiene <strong class="text-success">{{retrogamer.item.length}}</strong> Items por el precio total de
         <strong class="text-success">
                 S/{{getTotalCost()}}
             </strong>
-        <button mat-raised-button color="primary" class="btn btn-block" [disabled]="retrogamer.precioTotal == 0">Pagar S/ {{retrogamer.precioTotal}}</button>
+    </div>
+    <div class="col-md-6 d-flex justify-content-end">
+        <button mat-raised-button color="primary" class="btn btn-block mt-2" [disabled]="retrogamer.precioTotal == 0" (click)="RegistrarUsuario()">Ingresar Datos de Pedido</button>
+    </div>
+</div>
+
+<div class="col-12">
+    <div #paypal>
+
     </div>
 </div>
 <div class="row mt-2">

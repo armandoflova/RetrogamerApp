@@ -1,0 +1,52 @@
+<div>
+    <h4>Datos de Usuario</h4>
+    <form action="">
+
+        <div>
+            <label>DNI</label>
+            <input class="form-control">
+        </div>
+        <div>
+            <label>Nombres</label>
+            <input class="form-control">
+        </div>
+        <div>
+            <label>Apellidos</label>
+            <input class="form-control">
+        </div>
+        <div>
+            <label>Celular</label>
+            <input class="form-control">
+        </div>
+        <div>
+            <label>Correo</label>
+            <input class="form-control">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Region</label>
+                <select class="form-control" #r (change)="obtenerProvincia(r.value)">
+                <option>Selecione una Region</option>
+                <option *ngFor="let region of regiones" [value]="region.id_ubigeo" > {{region.nombre_ubigeo}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label>Provincia</label>
+                <select class="form-control" #p (change)="obtenerDistritos(p.value)">
+                <option>Selecione una Provincia</option>
+                <option *ngFor="let provincia of provincias" [value]="provincia.id_ubigeo"> {{provincia.nombre_ubigeo}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label>Distrito</label>
+                <select formControlName="ubigeoId" class="form-control">
+                 <option *ngFor="let distrito of distritos" [value]="distrito.id">{{distrito.nombre_ubigeo}}</option>
+               </select>
+            </div>
+            <div class="form-group">
+                <label>Dirección</label>
+                <input class="form-control">
+            </div>
+        </div>
+    </form>
+</div>

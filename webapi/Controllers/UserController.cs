@@ -26,5 +26,18 @@ namespace webapi.Controllers
             var usuarioReturn = _mapper.Map<UserReturnDtos>(Usuario);
             return Ok(usuarioReturn);
         }
+
+        [HttpPut("{idUsuario}")]
+
+        public async Task<IActionResult> editarUsuario(int idUsuario, UsuarioEditar usuarioEditar)
+        {
+            var usuario = await _repo.ObtenerUsuario(idUsuario);
+            _mapper.Map(usuarioEditar , usuario);
+            if (await _repo.GuardarTodo() ) {
+                return NoContent();
+            }
+
+            return BadRequest("No se pudierón Actualizar los datos");
+        }
     }
 }

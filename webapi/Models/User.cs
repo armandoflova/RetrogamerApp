@@ -12,6 +12,8 @@ namespace webapi.Models
         public string Direccion { get; set; }
         public string Genero { get; set; }
         public bool Estado { get; set; }
+
+        public string Celular {get; set;}
         public DateTime Fecha_Nacimiento { get; set; }
         public DateTime Fecha_Registro { get; set; }
         public string Uri { get; set; }        

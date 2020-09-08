@@ -25,6 +25,7 @@ namespace webapi.Helpers
             src.Fotos.FirstOrDefault( f => f.EsPrincipal).Url));
             CreateMap<Pedido , PedidoReturnDtos>();
             CreateMap<PedidoGuardarDtos, Pedido>();
+            CreateMap<UsuarioEditar , User>();
         }
     }
 }
